@@ -1,5 +1,5 @@
 /**
- * @file thread.c
+ * @file generic.c
  * @brief A program to demonstrate the processing of a value using
  * threads in C with the pthread library 
  * @author Mateus Almeida
@@ -92,8 +92,7 @@ void delete_thread_processing () {
 
 
 /**
- * This function exports the program's 
- * compilation data
+ * This function exports the program's compilation data
  * @param timespent: stores the time spent in milliseconds
  */
 void export_build_data (double timespent) {
@@ -156,7 +155,6 @@ int main () {
     process_thread(arg);
 
     Ticks[1] = clock();
-
     double time = (Ticks[1] - Ticks[0]) * 1000.0 / CLOCKS_PER_SEC;
 
     printf("Time spent: %g ms. [Enter]", time);

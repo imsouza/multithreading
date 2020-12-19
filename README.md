@@ -1,8 +1,8 @@
 # Multithreading C
 
-A program to demonstrate the processing of a value using threads in C with the pthread library
+This repository contains implementations that demonstrate data processing using threads with the pthread library
 
-## Usage
+## Run
 
 gcc thread.c -D_REENTRANT -lpthread
 
