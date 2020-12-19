@@ -1,3 +1,11 @@
+/**
+ * @file thread.c
+ * @brief A program to demonstrate the processing of a value using
+ * threads in C with the pthread library 
+ * @author Mateus Almeida
+ * @version 1.0
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
@@ -5,10 +13,10 @@
 #include <time.h>
 #include <stdatomic.h>
 
-// Setting the number of threads
+//! Setting the number of threads
 #define LEN 10
 
-// Condicional compilation directives
+//! Condicional compilation directives
 #ifndef LEN
 #define LEN 10
 #endif
@@ -17,18 +25,22 @@
 #define LEN 10
 #endif
 
-// This structure will be responsible for storing the processing values
+/**
+ * This structure will be responsible for 
+ * storing the processing values
+ */
 typedef struct {
   atomic_int index;
   atomic_int length;
 } thread_arg, *ptr_thread_arg;
 
-
-// Initializes threads
+//! Initializes threads
 pthread_t threads[LEN];
 
-
-// This function puts the thread to sleep for a specified time in milliseconds
+/**
+ * This function puts the thread to sleep for a 
+ * specified time in milliseconds
+ */
 void thread_sleep () {
   struct timespec time;
   time.tv_sec = 1;
@@ -36,7 +48,11 @@ void thread_sleep () {
 }
 
 
-// This function saves the processing of the thread in a separate file
+/**
+ * This function saves the processing of the 
+ * thread in a separate file
+ * @param i: increment unit
+ */
 void save_thread_processing (int i) {
   FILE *fp_unity, *fp_processing;
 
@@ -63,8 +79,10 @@ void save_thread_processing (int i) {
 }
 
 
-// This function deletes the file saved on the next run so 
-// that it can be rewritten
+/**
+ * This function deletes the file saved on the next run so 
+ * that it can be rewritten
+ */
 void delete_thread_processing () {
   FILE *fp_processing;
   fp_processing = fopen("processing.txt", "w");
@@ -73,7 +91,11 @@ void delete_thread_processing () {
 }
 
 
-// This function exports the program's compilation data
+/**
+ * This function exports the program's 
+ * compilation data
+ * @param timespent: stores the time spent in milliseconds
+ */
 void export_build_data (double timespent) {
   FILE *fp_build;
   fp_build = fopen("build.txt", "w");
@@ -82,13 +104,12 @@ void export_build_data (double timespent) {
   fclose(fp_build);
 }
 
-/*
-void display_processing (int i) {
-  printf("(Thread: %li | Value: %i)\n", pthread_self(), i);
-}
-*/
 
-// This function is a pointer that will be executed on the thread
+/**
+ * This function is a pointer that will be 
+ * executed on the thread
+ * @param *arg: function to start the thread
+ */
 void *thread_init (void *arg) {
   ptr_thread_arg t_arg = (ptr_thread_arg) arg;
 
@@ -96,13 +117,16 @@ void *thread_init (void *arg) {
     if (i >= 500) {
       thread_sleep();
     }
-    //display_processing(i);
+
     save_thread_processing(i);
   }
 }
 
 
-// This function starts processing the thread
+/**
+ * This function starts processing the thread
+ * @param *arg: structure to process the thread
+ */
 void process_thread (thread_arg *arg) {
   for (int i = 0; i < LEN; i++) {
     arg[i].index = LEN; arg[i].length = LEN;
@@ -124,7 +148,6 @@ int main () {
   #else 
     delete_thread_processing();
 
-    // Calculation of processing time
     clock_t Ticks[2];
     Ticks[0] = clock();
 
@@ -134,7 +157,6 @@ int main () {
 
     Ticks[1] = clock();
 
-    // Processing time
     double time = (Ticks[1] - Ticks[0]) * 1000.0 / CLOCKS_PER_SEC;
 
     printf("Time spent: %g ms. [Enter]", time);

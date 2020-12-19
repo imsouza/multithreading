@@ -1,6 +1,6 @@
 # Multithreading C
 
-An application to display the results of processing a value using threads in C with the pthread library
+A program to demonstrate the processing of a value using threads in C with the pthread library
 
 ## Usage
 
