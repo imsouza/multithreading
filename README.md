@@ -4,7 +4,7 @@ This repository contains implementations that demonstrate data processing using 
 
 ## Run
 
-gcc thread.c -D_REENTRANT -lpthread
+gcc file.c -D_REENTRANT -lpthread
 
 ## Author
 

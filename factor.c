@@ -13,9 +13,6 @@
 #include <inttypes.h>
 #include <unistd.h>
 
-//! Number of threads for processing
-#define THREADS 5
-
 //! Condicional compilation directives
 #ifndef THREADS
 #define THREADS 5

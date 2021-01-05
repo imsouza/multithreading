@@ -13,9 +13,6 @@
 #include <time.h>
 #include <stdatomic.h>
 
-//! Setting the number of threads
-#define LEN 10
-
 //! Condicional compilation directives
 #ifndef LEN
 #define LEN 10
